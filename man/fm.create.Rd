@@ -8,20 +8,22 @@
 \alias{closeAndDeleteFiles}
 
 \title{
-	Functions to create new and open existing file matrices.
+	Functions to create a new, or open an existing, filematrix
 }
 \description{
  %Create a new or open existing \code{\linkS4class{filematrix}} object.
  
- \code{fm.create} creates a new file file matrix. If a file matrix with this name exists, it is overwritten.
+ \code{fm.create} creates a new filematrix. If a filematrix with this name exists, it is overwritten.
  
- \code{fm.create.from.matrix} creates a new file matrix from an existing R matrix.
+ \code{fm.create.from.matrix} creates a new filematrix from an existing R matrix.
  
- \code{fm.open} opens an existing file matrix.
+ \code{fm.open} opens an existing filematrix.
  
- \code{fm.load} loads entire existing file matrix into memory as a regular R matrix.
+ \code{fm.load} loads entire existing filematrix into memory as an ordinary R matrix.
  
  \code{fm.create.from.text.file} reads a matrix from a text file and saves it into a new file-backed matrix. The rows in the text file become columns in the file-backed matrix.
+ 
+ ###  !!!!!!!!! As mentioned below this needs some unpacking. The transpose piece, in particular, seems arbitrary and odd.    !!!!!!!
 }
 \usage{
 fm.create( 
@@ -64,7 +66,7 @@ closeAndDeleteFiles( con )
 }
 \arguments{
  \item{filenamebase}{
-  Name without extension for the files storing the file matrix. \cr
+  Name without extension for the files storing the filematrix. \cr
   The file \code{<filenamebase>.bmat} keeps the matrix values and \code{<filenamebase>.desc.txt} stores the matrix dimensions, data type, and data type size.
   Names of rows and columns, if set, are stored in \code{<filenamebase>.nmsrow.txt} and \code{<filenamebase>.nmscol.txt}.
  }
@@ -83,13 +85,13 @@ closeAndDeleteFiles( con )
   Do not set if not sure.
  }
  \item{mat}{
- 	Regular R matrix, to be copied into a new file matrix.
+ 	Regular R matrix, to be copied into a new filematrix.
  }
  \item{readonly}{
-  If \code{TRUE}, the values in the opened file matrix cannot be changed.
+  If \code{TRUE}, the values in the opened filematrix cannot be changed.
  }
  \item{textfilename}{
-  Name of the text file with matrix data, to be copied into a new file matrix.
+  Name of the text file with matrix data, to be copied into a new filematrix.
  }
  \item{skipRows}{
   Number of rows with column names. The matrix values are expected after first \code{skipRows} rows of the file. Can be zero.
@@ -99,6 +101,7 @@ closeAndDeleteFiles( con )
  }
  \item{sliceSize}{
   The text file with matrix is read in chuncks of \code{sliceSize} rows.
+  ## !!!!!!   The sliceSize stuff needs elaboration and/or clarification. Another sentence explaining the method would help.  !!!!!!!!!
  }
  \item{omitCharacters}{
   The text string representing missing values.
@@ -110,15 +113,15 @@ closeAndDeleteFiles( con )
   The row names are taken from the \code{rowNamesColumn}-th column of the text file.
  }
  \item{con}{
-  A file matrix.
+  A filematrix.
  }
  \item{lockfile}{
-  Optional. Name of a lock file. Used to avoid simultaneous operations by multiple R instances accessing the same file matrix or dufferent file matrices on the same hard drive. Do not use if not sure.
+  Optional. Name of a lock file. Used to avoid simultaneous operations by multiple R instances accessing the same filematrix or a different filematrix on the same hard drive. Do not use if not sure.
  }
 }
 
 \details{
-  Once created or opened, file matrix object can be accessed as a regular matrix using both vector \code{fm[]} and matrix \code{fm[,]} indexing. 
+  Once created or opened, a filematrix object can be accessed as an ordinary matrix using both vector \code{fm[]} and matrix \code{fm[,]} indexing. 
   The indices can be integer or logical vectors.
 }
 \value{
@@ -138,7 +141,7 @@ closeAndDeleteFiles( con )
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-  For more on the use of file matrices see \code{\linkS4class{filematrix}}.
+  For more on the use of filematrices see \code{\linkS4class{filematrix}}.
 }
 \examples{
 filename = tempfile();
