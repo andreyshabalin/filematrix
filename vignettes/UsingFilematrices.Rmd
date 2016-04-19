@@ -8,7 +8,6 @@ output:
 vignette: >
   %\VignetteIndexEntry{Filematrix overview}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 

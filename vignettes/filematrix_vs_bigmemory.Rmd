@@ -6,7 +6,6 @@ output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Filematrix vs. bigmemory (packages)}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ## Motivation for creation of `filematrix` package
