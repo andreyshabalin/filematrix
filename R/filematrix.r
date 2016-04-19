@@ -22,15 +22,18 @@ library(methods);
 ### the same hard drive.
 
 .file.lock = function(fname = NULL, timeout = 3600000) {
+	if (!requireNamespace("RSQLite", quietly = TRUE)) {
+		stop("RSQLite needed for file lock to work. Please install it.", call. = FALSE)
+	}
 	if(is.character(fname)) {
 		# library(RSQLite)
-		con <- dbConnect(SQLite(), dbname = fname)
-		dbGetQuery(con, paste0('PRAGMA busy_timeout = ', timeout));
+		con <- RSQLite::dbConnect(RSQLite::SQLite(), dbname = fname)
+		RSQLite::dbGetQuery(con, paste0('PRAGMA busy_timeout = ', timeout));
 		lock = function() {
-			dbGetQuery(con, 'BEGIN IMMEDIATE TRANSACTION')
+			RSQLite::dbGetQuery(con, 'BEGIN IMMEDIATE TRANSACTION')
 		}
 		unlock = function() {
-			dbGetQuery(con, 'COMMIT TRANSACTION')
+			RSQLite::dbGetQuery(con, 'COMMIT TRANSACTION')
 		}
 		lockedrun = function(expr) {
 			on.exit(unlock())
@@ -38,7 +41,7 @@ library(methods);
 			expr
 		}
 		close = function(){
-			dbDisconnect(con);
+			RSQLite::dbDisconnect(con);
 		}
 		return( list(lock=lock, unlock=unlock, lockedrun = lockedrun, close = close ) );
 	} else {

@@ -1,5 +1,5 @@
 importFrom("methods", "setRefClass", "new")
-importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
+#importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
 importFrom("utils", "flush.console", "tail")
 exportPattern("^[[:alpha:]]+")
 exportMethods(
