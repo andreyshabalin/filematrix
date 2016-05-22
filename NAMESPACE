@@ -1,7 +1,8 @@
 importFrom("methods", "setRefClass", "new")
-#importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
+importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
 importFrom("utils", "flush.console", "tail")
 exportPattern("^[[:alpha:]]+")
+exportClasses("filematrix")
 exportMethods(
     "as.matrix",
     "dim",
@@ -15,9 +16,5 @@ exportMethods(
     "length",
     "close"
 )
-exportClasses(
-    "filematrix" 
-)
 S3method("[", filematrix)
 S3method("[<-", filematrix)
-
