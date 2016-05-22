@@ -662,9 +662,13 @@ fm.open = function(filenamebase, readonly = FALSE, lockfile = NULL) {
 # Open and read the the whole matrix in memory.
 fm.load = function(filenamebase, lockfile = NULL) {
 	fm = fm.open(filenamebase = filenamebase, readonly = TRUE, lockfile = lockfile);
-	mat = as.matrix(fm);
-	if( is.matrix(mat) )
-		dimnames(mat) = dimnames(fm);
+	mat = fm$readAll();
+	if( is.matrix(mat) ) {
+		dn = dimnames(fm);
+		if(!is.null(dn))
+			if(!all(sapply(dn, is.null)))
+				dimnames(mat) = dn;
+	}
 	fm$close();
 	return(mat);
 }
