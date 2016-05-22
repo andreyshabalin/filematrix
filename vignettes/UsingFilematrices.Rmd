@@ -1,7 +1,8 @@
 ---
 title: "Filematrix overview"
-author: "Andrey Shabalin"
+author: "Andrey A Shabalin"
 date: "`r Sys.Date()`"
+package: "`r pkg_ver('filematrix')`"
 output: 
   BiocStyle::html_document:
     toc: true # table of content true
@@ -11,20 +12,31 @@ vignette: >
 ---
 
 
-Using the object class `filematrix` one can create and access large matrices stored in files, not computer memory.
-Filematrices can be as large as the storage allows. The package has been tested on matrices several terabytes in size.
+The `filematrix` package provides functions to create and access large matrices stored in files, not computer memory.
+Filematrices can be as large as the storage allows. The package has been tested on matrices multiple terabytes in size.
 
-
-# Creating filematrices
+# Creating a filematrix
 
 File matrices can be created using functions `fm.create`, `fm.create.from.matrix`, or `fm.create.from.text.file`:
 
-```{r}
-suppressPackageStartupMessages( library(filematrix) )
-fm = fm.create(filenamebase = 'fmatrix', nrow = 5000, ncol = 5000, type = 'double')
+```{r setup, echo=FALSE}
+  library(knitr)
+  opts_knit$set(root.dir=tempdir())
 ```
 
-The code above creates two files: `fmatrix.bmat` which stores the filematrix values, and `fmatrix.desc.txt` which stores the filematrix information, such as filematrix dimensions, data type, and data type size.
+
+```{r message=FALSE}
+library(filematrix)
+fm = fm.create(filenamebase = "fmatrix", nrow = 5000, ncol = 5000, type = "double")
+```
+
+The code above creates two files: `fmatrix.bmat` which stores the filematrix values, and `fmatrix.desc.txt` which stores the filematrix description, such as dimensions, data type, and data type size.
+
+Here is the content of the description file:
+
+```{r comment=""}
+cat(readLines("fmatrix.desc.txt"), sep = "\n")
+```
 
 # Reading from and writing to a filematrix
 
@@ -33,7 +45,7 @@ Any changes to a filematrix are **immediately** written to the `.bmat` file.
 
 
 ```{r}
-fm[1:3, 1:2] = 1:6;
+fm[1:3, 1:2] = 1:6
 fm[1:4, 1:3]
 colSums(fm[,1:4])
 ```
@@ -51,8 +63,8 @@ fm[5001:5004]
 File matrices can also have row and column names, like regular R matrices.
 
 ```{r}
-colnames(fm) = paste0('Col',1:ncol(fm))
-rownames(fm) = paste0('Row',1:nrow(fm))
+colnames(fm) = paste0("Col", 1:ncol(fm))
+rownames(fm) = paste0("Row", 1:nrow(fm))
 ```
 
 The row and column names of the filematrix `fm` are stored in `fmatrix.nmsrow.txt` and `fmatrix.nmscol.txt` respectively.
@@ -71,7 +83,7 @@ close(fm)
 An existing filematrix can be opened with `fm.open`.
 
 ```{r}
-fm = fm.open(filenamebase = 'fmatrix', readonly = FALSE);
+fm = fm.open(filenamebase = "fmatrix", readonly = FALSE)
 ```
 
 To prevent any changes to the values of the filematrix set `readonly = TRUE`.
@@ -79,7 +91,7 @@ To prevent any changes to the values of the filematrix set `readonly = TRUE`.
 An existing filematrix that would fit in memory can be loaded fully with `fm.load`
 
 ```{r}
-mat = fm.load('fmatrix');
+mat = fm.load("fmatrix")
 ```
 
 # By column access is faster then by rows
@@ -92,12 +104,12 @@ matrix(1:12,3,4)
 
 Thus, access to a filematrix values by columns is much faster than access by rows:
 
-```{r}
+```{r row-col-timing, cache=TRUE}
 timecol = system.time( { sum(fm[ ,1:10]) } )[3]
 timerow = system.time( { sum(fm[1:10, ]) } )[3]
 ### !!! Consider increasing number of cols/rows to get a non-zero value for the col example -- will be more informative. !!!
-cat('Reading ', nrow(fm)*10, ' values from 10 columns takes ', timecol, ' seconds', '\n',
-    'Reading ', ncol(fm)*10, ' values from 10 rows takes ',    timerow, ' seconds', '\n', sep = '')
+cat("Reading ", nrow(fm)*10, " values from 10 columns takes ", timecol, " seconds", "\n",
+    "Reading ", ncol(fm)*10, " values from 10 rows takes ",    timerow, " seconds", "\n", sep = "")
 ```
 
 # Appending columns

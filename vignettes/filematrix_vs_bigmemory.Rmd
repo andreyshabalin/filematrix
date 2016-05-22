@@ -1,32 +1,33 @@
 ---
 title: "Filematrix vs. bigmemory (packages)"
-author: "Andrey Shabalin"
+author: "Andrey A Shabalin"
 date: "`r Sys.Date()`"
+package: "`r pkg_ver('filematrix')`"
 output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Filematrix vs. bigmemory (packages)}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-## Motivation for creation of `filematrix` package
+# Motivation for creation of `filematrix` package
 
 The `filematrix` package was originally conceived as an alternative to `bigmemory` package for two reasons.
 First, matrices created with `bigmemory` on NFS (network file system) have often been **corrupted** (contained all zeros). This is most likely a fault of memory-mapped files on NFS. Second, `bigmemory` was **not available for Windows** initially. It is now fully cross platform.
 
 
-### Differences between `filematrix` and `bigmemory` packages
+## Differences between `filematrix` and `bigmemory` packages
 
 The packages use different libraries to read from and write to their big files. 
 `filematrix` uses `readBin` and `writeBin` R functions. `bigmemory` uses memory-mapped file access via `BH` R package (Boost C++).
 
-Also, `filematrix` can store real values in `short` 4 byte format; this feature is unavailable in `bigmemory`.
+Also, `filematrix` can store real values in `short` 4 byte format. This feature is not available in `bigmemory`.
 
-### Differences in tests
+## Differences in tests
 
 Due to different file access approach:
 
 - `bigmemory` accumulates changes to the matrix in memory and writes them to the file upon call of `flush` or file closure.
-- `filematrix` writes the changes to the file upon the request without delay, unless specified otherwise.
+- `filematrix` writes the changes to the file upon the request without delay.
 
 Consequently:
 
