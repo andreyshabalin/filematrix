@@ -37,4 +37,61 @@ Consequently:
 - `bigmemory` is better for random access of the file matrices.
 - `filematrix` is equally good or better for block and column-wise access of the file matrices.
 
+## Example when `filematrix` is much more efficient than `bigmemory`
+
+```{r setup, echo=FALSE}
+  library(knitr)
+  opts_knit$set(root.dir=tempdir())
+```
+
+Let us consider a simple task of filling in a large matrix (twice memory size).
+Below is the code using `filematrix`. It finishes in 10 minutes and does not interfere with other programs.
+
+```{r eval=FALSE}
+library(filematrix)
+fm = fm.create('E:/big_fm', nrow = 1e5, ncol = 1e5)
+
+tic = proc.time()
+for( i in seq_len(ncol(fm)) ) {
+	cat(i, "of", ncol(fm), "\n")
+	fm[,i] = i + 1:nrow(fm)
+}
+toc = proc.time()
+show(toc-tic)
+
+# Cleanup
+
+closeAndDeleteFiles(fm)
+```
+
+Filling the same sized big matrix with `bigmemory` can be very slow (**2.5 times** slow in this experiment).
+The `bigmemory` package uses memory mapped file technique to access the file.
+When the matrix is written to, the memory mapped file occupies all available RAM and the computer **slows to a halt**.
+![Task Manager shows the memory mapped file occupy all available RAM when filling a large matrix with `bigmemory` package.](figures/out_of_memory.png)
+
+Please excercise caution when running the code below.
+
+```{r eval=FALSE}
+library(bigmemory)
+fm = filebacked.big.matrix(nrow = 1e5, ncol = 1e5, 
+								  type = 'double', backingfile = 'big_bm.bmat',
+								  backingpath = 'E:/', descriptorfile = 'big_bm.desc.txt')
+
+tic = proc.time()
+for( i in seq_len(ncol(fm)) ) {
+	cat(i, "of", ncol(fm), "\n")
+	fm[,i] = i + 1:nrow(fm)
+}
+flush(fm)
+toc = proc.time()
+show(toc-tic)
+
+# Cleanup
+
+rm(fm)
+gc()
+unlink('E:/big_bm.bmat')
+unlink('E:/big_bm.desc.txt')
+
+```
 
