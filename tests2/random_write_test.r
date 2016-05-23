@@ -1,7 +1,5 @@
 n = 20;
-
-library(filematrix)
-fm = fm.create(filenamebase = tempfile(), n, n)
+fm = fm.create(filenamebase = 'E:/test', n, n)
 mat = matrix(0, n, n);
 
 
@@ -11,9 +9,9 @@ colnames(fm) = as.character(1:ncol(fm));
 ### Fully indexed access
 
 k = 10;
-for( test in 1:20 ) {
+for( test in 1:100 ) {
 
-	cat('Fully indexed access, test', test,'\n');
+	cat('Fully indexed access', test,'\n');
 	rowset = sample.int(n, size = k);
 	colset = sample.int(n, size = k);
 	
@@ -30,9 +28,9 @@ stopifnot( all( as.matrix(fm) == mat ) );
 ### All columns access
 
 k = 10;
-for( test in 1:20 ) {
+for( test in 1:100 ) {
 	
-	cat('All columns access, test', test,'\n');
+	cat('All columns access', test,'\n');
 	colset = sample.int(n, size = k);
 	
 	value = matrix( runif(length(rowset)*n), length(rowset), n);
@@ -48,9 +46,9 @@ stopifnot( all( as.matrix(fm) == mat ) );
 ### All rows access
 
 k = 10;
-for( test in 1:20 ) {
+for( test in 1:100 ) {
 	
-	cat('All rows access, test', test,'\n');
+	cat('All rows access', test,'\n');
 	colset = sample.int(n, size = k);
 	
 	value = matrix( runif(n*length(colset)), n, length(colset));
@@ -66,9 +64,9 @@ stopifnot( all( as.matrix(fm) == mat ) );
 ### Vector access
 
 k = 10;
-for( test in 1:20 ) {
+for( test in 1:100 ) {
 	
-	cat('Vector access, test', test,'\n');
+	cat('Vector access', test,'\n');
 	set = sample.int(n^2, size = k^2);
 	
 	value = runif(k^2);
@@ -80,4 +78,8 @@ for( test in 1:20 ) {
 }
 stopifnot( all( as.matrix(fm) == mat ) );
 
-closeAndDeleteFiles(fm);
+fm$closeAndDeleteFiles();
+# 
+# 
+# a = 1:1e9;
+# b = as.vector(a)
