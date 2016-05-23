@@ -1,37 +1,38 @@
-## ------------------------------------------------------------------------
-suppressPackageStartupMessages( library(filematrix) )
-fm = fm.create(filenamebase = 'fmatrix', nrow = 1000, ncol = 1000, type = 'double')
+## ----setup, echo=FALSE---------------------------------------------------
+  library(knitr)
+  opts_knit$set(root.dir=tempdir())
+
+## ----message=FALSE-------------------------------------------------------
+library(filematrix)
+fm = fm.create(filenamebase = "fmatrix", nrow = 50, ncol = 50, type = "double")
+
+## ----comment=""----------------------------------------------------------
+cat(readLines("fmatrix.desc.txt"), sep = "\n")
 
 ## ------------------------------------------------------------------------
-fm[1:3, 1:2] = 1:6;
+fm[1:3, 1:2] = 1:6
 fm[1:4, 1:3]
 colSums(fm[,1:4])
 
 ## ------------------------------------------------------------------------
 fm[1:4]
-fm[1001:1004]
+fm[51:54]
 
 ## ------------------------------------------------------------------------
-colnames(fm) = paste0('Col',1:ncol(fm))
-rownames(fm) = paste0('Row',1:nrow(fm))
+colnames(fm) = paste0("Col", 1:ncol(fm))
+rownames(fm) = paste0("Row", 1:nrow(fm))
 
 ## ------------------------------------------------------------------------
 close(fm)
 
 ## ------------------------------------------------------------------------
-fm = fm.open(filenamebase = 'fmatrix');
+fm = fm.open(filenamebase = "fmatrix", readonly = FALSE)
 
 ## ------------------------------------------------------------------------
-mat = fm.load('fmatrix');
+mat = fm.load("fmatrix")
 
 ## ------------------------------------------------------------------------
 matrix(1:12,3,4)
-
-## ------------------------------------------------------------------------
-timecol = system.time( { sum(fm[ ,1:10]) } )[3]
-timerow = system.time( { sum(fm[1:10, ]) } )[3]
-cat('Reading ', nrow(fm)*10, ' values from 10 columns takes ', timecol, ' seconds', '\n',
-    'Reading ', ncol(fm)*10, ' values from 10 rows takes ',    timerow, ' seconds', '\n', sep = '')
 
 ## ------------------------------------------------------------------------
 dim(fm)
