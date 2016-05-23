@@ -12,18 +12,23 @@
 	\tabular{ll}{
 		Package: \tab filematrix \cr
 		Type: \tab Package \cr
-		Version: \tab 1.1 \cr
-		Date: \tab 2016-03-21 \cr
+		Version: \tab 1.1.0 \cr
+		Date: \tab 2016-05-23 \cr
 		License: \tab LGPL-3 \cr
 		Depends: \tab methods \cr
 	}
 	
-	Interface for working with large matrices from files in data storage, not held in computer memory.
-     Supports multiple data types (double, integer, logical and raw) of different sizes (e.g. 4, 2, or 1 byte integers).
-     Access to parts of the matrix is done by indexing, exactly as with usual R matrices.
-     Supports very large matrices (tested on 1 terabyte matrix), allowing for more than 2^32 rows or columns.
-     Cross-platform as a pure R implementation; does not rely on memory mapped files or any explicit C code.
-	
+	Interface for working with large matrices stored in files,
+	not in computer memory. Supports multiple non-character 
+	data types (double, integer, logical and raw) of 
+	various sizes (e.g. 8 and 4 byte real values).
+	Access to parts of the matrix is done by indexing (e.g. fm[,1]), 
+	exactly as with usual R matrices. Supports very large matrices.
+	Tested on multi-terabyte matrices. 
+	Allows for more than 2^32 rows or columns.
+	Allows for quick addition of extra columns to a filematrix.
+	Cross-platform as the package has R code only.
+    
 	A new \code{file.matrix} object can be created with \code{\link{fm.create}} and \code{\link{fm.create.from.matrix}}. Existing \code{file.matrix} files can be opened with \code{\link{fm.open}}.
 	
 	Once a \code{file.matrix} is created or opened it can be accessed as a regular \code{\link{matrix}} object in R.

@@ -125,17 +125,9 @@ closeAndDeleteFiles( con )
 	Returns a \code{\linkS4class{filematrix}} object.
 	The object can be closed with \code{close} command or closed and removed with \code{\link{closeAndDeleteFiles}} command.
 }
-%\references{
-%	The package website: \url{http://shabal.in/}
-%}
 \author{
 	Andrey A Shabalin \email{ashabalin@vcu.edu}
 }
-%\note{
-%%  ~~further notes~~
-%}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
   For more on the use of filematrices see \code{\linkS4class{filematrix}}.
@@ -151,5 +143,3 @@ print(fm[1:4,1:4])
 
 closeAndDeleteFiles(fm)
 }
-%\keyword{ file }
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

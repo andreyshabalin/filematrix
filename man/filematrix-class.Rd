@@ -102,17 +102,11 @@
    Performs the same operation as \code{fm = cbind(fm, mat)} for ordinary matrices.}
  }
 }
-
-%\note{
-%%  ~~further notes~~
-%}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-
-%\references{
-%	The package website: \url{http://shabal.in/}
-%}
+\value{
+	\code{length} function returns the number of elements in the filematrix.
+	
+	Functions \code{colnames}, \code{rownames}, and \code{dimnames} return the same values as their counterparts for the regular R matrices.
+}
 
 \author{
 	Andrey A Shabalin \email{ashabalin@vcu.edu}
