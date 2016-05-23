@@ -1,9 +1,11 @@
 ---
 title: "Best practices"
 author: "Andrey A Shabalin"
-date: "`r Sys.Date()`"
+date: "`r doc_date()`"
 package: "`r pkg_ver('filematrix')`"
-output: BiocStyle::html_document
+output:
+  BiocStyle::html_document:
+    toc: true # table of content true
 vignette: >
   %\VignetteIndexEntry{2 Best practices}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,9 +1,11 @@
 ---
 title: "Filematrix vs. bigmemory (packages)"
 author: "Andrey A Shabalin"
-date: "`r Sys.Date()`"
+date: "`r doc_date()`"
 package: "`r pkg_ver('filematrix')`"
-output: BiocStyle::html_document
+output: 
+  BiocStyle::html_document:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{3 Filematrix vs. bigmemory (packages)}
   %\VignetteEngine{knitr::rmarkdown}
