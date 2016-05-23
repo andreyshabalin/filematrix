@@ -31,7 +31,7 @@
 	For example: \code{fm[1:3,2:4]} and \code{fm[,2:4]}.
 	
 	The values can also be accessed with single indexing (vector-like access). \cr
-	For example: \code{fm[3:7]} and \code{fm[4:7] = 1:4}.                   ###  !!!!!!  This example makes no sense. !!!!!!!!
+	For example: \code{fm[3:7]} and \code{fm[4:7] = 1:4}.
 	
 	A whole filematrix can be read into an ordinary R matrix using \code{as.matrix} function or empty indexing \code{fm[]}.
 	
@@ -44,32 +44,27 @@
 	
 	A filematrix can be closed after use with \code{close} command. 
 	Please note, however, that there is no risk of losing modifications to a filematrix if an object is not closed, as all changes are instantly written to disk by default.
-
-	## !!!!!!!!!!  I dislike the indentation format of the below examples. I find it difficult to read. I would just left justify everything, but I guess it is fine if it is a standard format. !!!!!
-	
 }
-
-
 \usage{
-	\method{[}{filematrix}(x,i,j)
-	\method{[}{filematrix}(x,i,j) <- value
-	
+\method{[}{filematrix}(x,i,j)
+\method{[}{filematrix}(x,i,j) <- value
+
 %%	\S4method{[}{filematrix}(x)
-	\S4method{as.matrix}{filematrix}(x)
-	
-	\S4method{dim}{filematrix}(x)
-	\S4method{dim}{filematrix}(x) <- value
-	
-	\S4method{length}{filematrix}(x)
-	
-	\S4method{rownames}{filematrix}(x)
-	\S4method{rownames}{filematrix}(x) <- value
-	
-	\S4method{colnames}{filematrix}(x)
-	\S4method{colnames}{filematrix}(x) <- value
-	
-	\S4method{dimnames}{filematrix}(x)
-	\S4method{dimnames}{filematrix}(x) <- value
+\S4method{as.matrix}{filematrix}(x)
+
+\S4method{dim}{filematrix}(x)
+\S4method{dim}{filematrix}(x) <- value
+
+\S4method{length}{filematrix}(x)
+
+\S4method{rownames}{filematrix}(x)
+\S4method{rownames}{filematrix}(x) <- value
+
+\S4method{colnames}{filematrix}(x)
+\S4method{colnames}{filematrix}(x) <- value
+
+\S4method{dimnames}{filematrix}(x)
+\S4method{dimnames}{filematrix}(x) <- value
 }
 \arguments{
  \item{x}{
@@ -106,7 +101,6 @@
   \item{\code{appendColumns(mat)}}{ Increases filematrix by adding more columns (to the right side of the matrix). Matrix \code{mat} must have the same number of rows. \cr 
    Performs the same operation as \code{fm = cbind(fm, mat)} for ordinary matrices.}
  }
-### !!!!!!!!!!!! In the text above, I would prefer all variables 'value', 'num', 'start', and 'len' to be notated 'x' (first variable) and 'y' (second variable). But your current notation may be better for non-statistical users.  !!!!!!!!!!!!!!
 }
 
 %\note{
@@ -121,9 +115,11 @@
 %}
 
 \author{
-	Andrey Shabalin \email{ashabalin@vcu.edu}
+	Andrey A Shabalin \email{ashabalin@vcu.edu}
 }
 
 \seealso{
 	For function creating and opening file matrices see \code{\link{fm.create}}.
+	
+	Run \code{browseVignettes("filematrix")} for the list of vignettes.
 }

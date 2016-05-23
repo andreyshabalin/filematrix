@@ -33,8 +33,8 @@
 Due to lack of 64 bit integer data type in R, the package uses double values for calculation of indices. The precision of double data type is sufficient for indexing matrices up to 8,192 terabytes in size.
 }
 \author{
-	Andrey Shabalin \email{ashabalin@vcu.edu}
-%	Maintainer: Andrey Shabalin <ashabalin@vcu.edu>
+	Andrey A Shabalin \email{ashabalin@vcu.edu}
+%	Maintainer: Andrey A Shabalin <ashabalin@vcu.edu>
 }
 %\references{
 	%The package website: \url{http://shabal.in/}
@@ -43,4 +43,6 @@ Due to lack of 64 bit integer data type in R, the package uses double values for
 \keyword{ filematrix }
 \seealso{
 	See \code{\link{fm.create}} and \code{\linkS4class{filematrix}} for reference.
+	
+	Run \code{browseVignettes("filematrix")} for the list of vignettes.
 }

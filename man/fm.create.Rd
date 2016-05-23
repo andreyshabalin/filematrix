@@ -11,7 +11,7 @@
 	Functions to create a new, or open an existing, filematrix
 }
 \description{
- %Create a new or open existing \code{\linkS4class{filematrix}} object.
+ Create a new or open existing \code{\linkS4class{filematrix}} object.
  
  \code{fm.create} creates a new filematrix. If a filematrix with this name exists, it is overwritten.
  
@@ -21,10 +21,8 @@
  
  \code{fm.load} loads entire existing filematrix into memory as an ordinary R matrix.
  
- \code{fm.create.from.text.file} reads a matrix from a text file and saves it into a new file-backed matrix. The rows in the text file become columns in the file-backed matrix.
- 
- ###  !!!!!!!!! As mentioned below this needs some unpacking. The transpose piece, in particular, seems arbitrary and odd.    !!!!!!!
-}
+ \code{fm.create.from.text.file} reads a matrix from a text file and saves it into a new file-backed matrix. The rows in the text file become columns in the filematrix. The transposition happens because the text files stores data by rows and filematrices store data by columns.
+ }
 \usage{
 fm.create( 
     filenamebase, 
@@ -100,8 +98,7 @@ closeAndDeleteFiles( con )
   Number of columns before matrix values begin. Can be zero.
  }
  \item{sliceSize}{
-  The text file with matrix is read in chuncks of \code{sliceSize} rows.
-  ## !!!!!!   The sliceSize stuff needs elaboration and/or clarification. Another sentence explaining the method would help.  !!!!!!!!!
+  The text file with matrix is read in chuncks of \code{sliceSize} rows. This is a performance tuning parameter, it does not affect the outcome.
  }
  \item{omitCharacters}{
   The text string representing missing values.
@@ -132,7 +129,7 @@ closeAndDeleteFiles( con )
 %	The package website: \url{http://shabal.in/}
 %}
 \author{
-	Andrey Shabalin \email{ashabalin@vcu.edu}
+	Andrey A Shabalin \email{ashabalin@vcu.edu}
 }
 %\note{
 %%  ~~further notes~~
@@ -142,20 +139,17 @@ closeAndDeleteFiles( con )
 
 \seealso{
   For more on the use of filematrices see \code{\linkS4class{filematrix}}.
+  
+ 	Run \code{browseVignettes("filematrix")} for the list of vignettes.
 }
 \examples{
-filename = tempfile();
+fm = fm.create(filenamebase=tempfile(), nrow=10, ncol=10)
 
-fm = fm.create(filenamebase=filename, nrow=10, ncol=10);
-
-fm[1:3,1:3] = 1:9;
+fm[1:3,1:3] = 1:9
 
 print(fm[1:4,1:4])
 
-close(fm);
-
-file.remove(paste0(filename,".bmat"));
-file.remove(paste0(filename,".desc.txt"));
+closeAndDeleteFiles(fm)
 }
 %\keyword{ file }
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
