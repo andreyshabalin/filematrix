@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 package: "`r pkg_ver('filematrix')`"
 output: BiocStyle::html_document
 vignette: >
-  %\VignetteIndexEntry{Filematrix vs. bigmemory (packages)}
+  %\VignetteIndexEntry{3 Filematrix vs. bigmemory (packages)}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
