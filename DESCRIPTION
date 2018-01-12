@@ -21,4 +21,4 @@ URL: https://github.com/andreyshabalin/filematrix
 License: LGPL-3
 Depends: methods, utils
 VignetteBuilder: knitr
-Suggests: BiocStyle, knitr, rmarkdown, bigmemory, RSQLite
+Suggests: BiocStyle, knitr, rmarkdown, RSQLite
