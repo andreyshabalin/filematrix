@@ -1,8 +1,8 @@
 Package: filematrix
 Type: Package
 Title: File-Backed Matrix Class with Convenient Read and Write Access
-Version: 1.1.0
-Date: 2016-05-23
+Version: 1.1.1
+Date: 2018-01-11
 Author: Andrey A Shabalin
 Maintainer: Andrey A Shabalin <ashabalin@vcu.edu>
 Description: Interface for working with large matrices stored in files,
@@ -19,6 +19,6 @@ Description: Interface for working with large matrices stored in files,
 BugReports: https://github.com/andreyshabalin/filematrix/issues
 URL: https://github.com/andreyshabalin/filematrix
 License: LGPL-3
-Depends: methods, RSQLite, utils
+Depends: methods, utils
 VignetteBuilder: knitr
-Suggests: BiocStyle, knitr, rmarkdown, bigmemory
+Suggests: BiocStyle, knitr, rmarkdown, bigmemory, RSQLite

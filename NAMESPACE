@@ -1,7 +1,11 @@
-importFrom("methods", "setRefClass", "new")
-importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
-importFrom("utils", "flush.console", "tail")
-exportPattern("^[[:alpha:]]+")
+export(
+    "fm.create",
+    "fm.create.from.matrix",
+    "fm.open",
+    "fm.load",
+    "fm.create.from.text.file",
+    "closeAndDeleteFiles"
+)
 exportClasses("filematrix")
 exportMethods(
     "as.matrix",
@@ -18,3 +22,7 @@ exportMethods(
 )
 S3method("[", filematrix)
 S3method("[<-", filematrix)
+
+importFrom("methods", "setRefClass", "new")
+# importFrom("RSQLite", "SQLite", "dbConnect", "dbGetQuery", "dbDisconnect")
+importFrom("utils", "flush.console", "tail")

@@ -1,83 +1,86 @@
 n = 20;
 
 library(filematrix)
-fm = fm.create(filenamebase = tempfile(), n, n)
-mat = matrix(0, n, n);
+fmt = fm.create(filenamebase = tempfile(), nrow = n, ncol = n)
+mat = matrix(0, nrow = n, ncol = n);
 
 
-rownames(fm) = as.character(1:nrow(fm));
-colnames(fm) = as.character(1:ncol(fm));
+rownames(fmt) = as.character(1:nrow(fmt));
+colnames(fmt) = as.character(1:ncol(fmt));
 
 ### Fully indexed access
 
 k = 10;
-for( test in 1:20 ) {
+for( test in 1:20 ){
 
-	cat('Fully indexed access, test', test,'\n');
-	rowset = sample.int(n, size = k);
-	colset = sample.int(n, size = k);
-	
-	value = matrix( runif(length(rowset)*length(colset)), length(rowset), length(colset));
-	
-	stopifnot( all( fm[rowset, colset] == mat[rowset, colset] ) );
+    message("Fully indexed access, test ", test);
+    rowset = sample.int(n, size = k);
+    colset = sample.int(n, size = k);
+    
+    value = matrix(
+                data = runif(length(rowset)*length(colset)),
+                nrow = length(rowset),
+                ncol = length(colset));
+    
+    stopifnot( all( fmt[rowset, colset] == mat[rowset, colset] ) );
 
-	fm[rowset, colset] = value;
-	mat[rowset, colset] = value;
+    fmt[rowset, colset] = value;
+    mat[rowset, colset] = value;
 }
-stopifnot( all( as.matrix(fm) == mat ) );
+stopifnot( all( as.matrix(fmt) == mat ) );
 
 
 ### All columns access
 
 k = 10;
-for( test in 1:20 ) {
-	
-	cat('All columns access, test', test,'\n');
-	colset = sample.int(n, size = k);
-	
-	value = matrix( runif(length(rowset)*n), length(rowset), n);
-	
-	stopifnot( all( fm[rowset, ] == mat[rowset, ] ) );
+for( test in 1:20 ){
+    
+    message("All columns access, test ", test);
+    colset = sample.int(n, size = k);
+    
+    value = matrix(runif(length(rowset)*n), nrow = length(rowset), ncol = n);
+    
+    stopifnot( all( fmt[rowset, ] == mat[rowset, ] ) );
 
-	fm[rowset, ] = value;
-	mat[rowset, ] = value;
+    fmt[rowset, ] = value;
+    mat[rowset, ] = value;
 }
-stopifnot( all( as.matrix(fm) == mat ) );
+stopifnot( all( as.matrix(fmt) == mat ) );
 
 
 ### All rows access
 
 k = 10;
-for( test in 1:20 ) {
-	
-	cat('All rows access, test', test,'\n');
-	colset = sample.int(n, size = k);
-	
-	value = matrix( runif(n*length(colset)), n, length(colset));
-	
-	stopifnot( all( fm[, colset] == mat[, colset] ) );
+for( test in 1:20 ){
+    
+    message("All rows access, test ", test);
+    colset = sample.int(n, size = k);
+    
+    value = matrix( runif(n*length(colset)), nrow = n, ncol = length(colset));
+    
+    stopifnot( all( fmt[, colset] == mat[, colset] ) );
 
-	fm[, colset] = value;
-	mat[, colset] = value;
+    fmt[, colset] = value;
+    mat[, colset] = value;
 }
-stopifnot( all( as.matrix(fm) == mat ) );
+stopifnot( all( as.matrix(fmt) == mat ) );
 
 
 ### Vector access
 
 k = 10;
-for( test in 1:20 ) {
-	
-	cat('Vector access, test', test,'\n');
-	set = sample.int(n^2, size = k^2);
-	
-	value = runif(k^2);
-	
-	stopifnot( all( fm[set] == mat[set] ) );
-	
-	fm[set] = value;
-	mat[set] = value;
+for( test in 1:20 ){
+    
+    message("Vector access, test ", test);
+    set = sample.int(n^2, size = k^2);
+    
+    value = runif(k^2);
+    
+    stopifnot( all( fmt[set] == mat[set] ) );
+    
+    fmt[set] = value;
+    mat[set] = value;
 }
-stopifnot( all( as.matrix(fm) == mat ) );
+stopifnot( all( as.matrix(fmt) == mat ) );
 
-closeAndDeleteFiles(fm);
+closeAndDeleteFiles(fmt);

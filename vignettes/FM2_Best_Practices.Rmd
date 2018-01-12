@@ -1,8 +1,6 @@
 ---
 title: "Best practices"
 author: "Andrey A Shabalin"
-date: "`r doc_date()`"
-package: "`r pkg_ver('filematrix')`"
 output:
   BiocStyle::html_document:
     toc: true # table of content true
@@ -14,27 +12,34 @@ vignette: >
 # Working with large matrices
 
 The `filematrix` package can be used for matrices of any size.
-The most convenient way of working with small and moderately sized matrices is to quickly save and load them via `fm.create.from.matrix` and `fm.load` respectively.
+The most convenient way of working with small and moderately sized matrices
+is to quickly save and load them via `fm.create.from.matrix`
+and `fm.load` respectively.
 
-However, the main purpose of the `filematrix` package is to allow users to work with matrices many times larger than the amount of computer memory.
+However, the main purpose of the `filematrix` package is to allow users
+to work with matrices many times larger than the amount of computer memory.
 Such matrices can only be accessed by parts.
 
 Let us setup a sufficiently large matrix for code examples below:
 
 ```{r setup, echo=FALSE}
-  library(knitr)
-  opts_knit$set(root.dir=tempdir())
+library(knitr)
+# opts_knit$set(root.dir=tempdir())
 ```
 
 ```{r message=FALSE}
 library(filematrix)
-fm = fm.create(filenamebase = tempfile(), nrow = 5000, ncol = 10000, type = "double")
+fm = fm.create(
+        filenamebase = tempfile(),
+        nrow = 5000,
+        ncol = 10000,
+        type = "double")
 ```
 
 # Accessing all matrix elements
 
 The fastest way to read or write all elements of a filematrix
-is to work with columns sequentially, several columns at a time.
+is to work with columns sequentially, multiple columns at a time.
 It is much faster than accessing a filematrix by rows.
 
 The three examples below illustrate how this can be done for such tasks as
@@ -51,10 +56,10 @@ step1 = 512
 runto = ncol(fm)
 nsteps = ceiling(runto/step1)
 for( part in seq_len(nsteps) ) { # part = 1
- 	fr = (part-1)*step1 + 1
- 	to = min(part*step1, runto)
-	cat( "Filling in columns", fr, "to", to, "\n")
- 	fm[,fr:to] = runif(nrow(fm) * (to-fr+1))
+    fr = (part-1)*step1 + 1
+    to = min(part*step1, runto)
+    message( "Filling in columns ", fr, " to ", to)
+    fm[,fr:to] = runif(nrow(fm) * (to-fr+1))
 }
 rm(part, step1, runto, nsteps, fr, to)
 ```
@@ -69,14 +74,15 @@ step1 = 512
 runto = ncol(fm)
 nsteps = ceiling(runto/step1)
 for( part in seq_len(nsteps) ) { # part = 1
- 	fr = (part-1)*step1 + 1
- 	to = min(part*step1, runto)
-	cat( "Calculating column sums, processing columns", fr, "to", to, "\n")
- 	fmcolsums[fr:to] = colSums(fm[,fr:to])
+    fr = (part-1)*step1 + 1
+    to = min(part*step1, runto)
+    message("Calculating column sums, processing columns ", fr, " to ", to)
+    fmcolsums[fr:to] = colSums(fm[,fr:to])
 }
 rm(part, step1, runto, nsteps, fr, to)
 
-cat("Sums of first and last columns are", fmcolsums[1], "and", tail(fmcolsums,1), "\n")
+message("Sums of first and last columns are ", 
+        fmcolsums[1], " and ", tail(fmcolsums,1))
 ```
 
 ## Calculating row sums
@@ -89,18 +95,25 @@ step1 = 512
 runto = ncol(fm)
 nsteps = ceiling(runto/step1)
 for( part in seq_len(nsteps) ) { # part = 1
- 	fr = (part-1)*step1 + 1
- 	to = min(part*step1, runto)
-	cat( "Calculating row sums, processing columns", fr, "to", to, "\n")
- 	fmrowsums = fmrowsums + rowSums(fm[,fr:to])
+    fr = (part-1)*step1 + 1
+    to = min(part*step1, runto)
+    message("Calculating row sums, processing columns ", fr, " to ", to)
+    fmrowsums = fmrowsums + rowSums(fm[,fr:to])
 }
 rm(part, step1, runto, nsteps, fr, to)
 
-cat("Sums of first and last rows are", fmrowsums[1], "and", tail(fmrowsums,1), "\n")
+message("Sums of first and last rows are ", 
+        fmrowsums[1], " and ", tail(fmrowsums,1))
 ```
 
 # Removing filematrix after use
 
 ```{r}
 closeAndDeleteFiles(fm)
+```
+
+# Version information
+
+```{r version}
+sessionInfo()
 ```
