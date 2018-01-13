@@ -35,7 +35,7 @@
     for indexing matrices up to 8,192 terabytes in size.
 }
 \author{
-    Andrey A Shabalin \email{ashabalin@vcu.edu}
+    Andrey A Shabalin \email{andrey.shabalin@gmail.com}
 }
 \keyword{ filematrix }
 \seealso{

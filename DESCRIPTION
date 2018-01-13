@@ -4,7 +4,7 @@ Title: File-Backed Matrix Class with Convenient Read and Write Access
 Version: 1.1.1
 Date: 2018-01-11
 Author: Andrey A Shabalin
-Maintainer: Andrey A Shabalin <ashabalin@vcu.edu>
+Maintainer: Andrey A Shabalin <andrey.shabalin@gmail.com>
 Description: Interface for working with large matrices stored in files,
         not in computer memory. Supports multiple non-character
         data types (double, integer, logical and raw) of

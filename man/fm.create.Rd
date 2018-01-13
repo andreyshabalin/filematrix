@@ -155,7 +155,7 @@ closeAndDeleteFiles(con)
     closed and deleted from disk with \code{\link{closeAndDeleteFiles}} command.
 }
 \author{
-    Andrey A Shabalin \email{ashabalin@vcu.edu}
+    Andrey A Shabalin \email{andrey.shabalin@gmail.com}
 }
 \seealso{
     For more on the use of filematrices see \code{\linkS4class{filematrix}}.
