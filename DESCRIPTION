@@ -1,7 +1,7 @@
 Package: filematrix
 Type: Package
 Title: File-Backed Matrix Class with Convenient Read and Write Access
-Version: 1.1.1
+Version: 1.2
 Date: 2018-01-11
 Author: Andrey A Shabalin
 Maintainer: Andrey A Shabalin <andrey.shabalin@gmail.com>
