@@ -3,8 +3,10 @@ Type: Package
 Title: File-Backed Matrix Class with Convenient Read and Write Access
 Version: 1.2
 Date: 2018-01-11
-Author: Andrey A Shabalin
-Maintainer: Andrey A Shabalin <andrey.shabalin@gmail.com>
+Authors@R: person(  "Andrey A", "Shabalin",
+                    role = c("aut", "cre"),
+                    email = "andrey.shabalin@gmail.com",
+                    comment = c(ORCID = "0000-0003-0309-6821"))
 Description: Interface for working with large matrices stored in files,
         not in computer memory. Supports multiple non-character
         data types (double, integer, logical and raw) of
