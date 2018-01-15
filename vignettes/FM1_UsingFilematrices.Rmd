@@ -1,14 +1,15 @@
 ---
 title: "Filematrix Overview"
 author: "Andrey A Shabalin"
-output: 
-  BiocStyle::html_document:
-    toc: true # table of content true
+output:
+    html_document:
+        theme: readable
+        toc: true # table of content true
 vignette: >
-  %\VignetteIndexEntry{1 Filematrix overview}
-  %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteIndexEntry{1 Filematrix overview}
+    %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
-  chunk_output_type: console
+    chunk_output_type: console
 ---
 
 # Introduction

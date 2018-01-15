@@ -1,12 +1,15 @@
 ---
 title: "Filematrix vs. bigmemory (packages)"
 author: "Andrey A Shabalin"
-output: 
-  BiocStyle::html_document:
-    toc: true
+output:
+    html_document:
+        theme: readable
+        toc: true # table of content true
 vignette: >
-  %\VignetteIndexEntry{3 Filematrix vs. bigmemory (packages)}
-  %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteIndexEntry{3 Filematrix vs. bigmemory (packages)}
+    %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+    chunk_output_type: console
 ---
 
 # Motivation for creation of `filematrix` package
