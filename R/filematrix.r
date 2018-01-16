@@ -35,15 +35,15 @@ file.lock = function(fname = NULL, timeout = 3600000){
         lock = function(){
             suppressWarnings(
                 {RSQLite::dbGetQuery(con, "BEGIN IMMEDIATE TRANSACTION");}
-            )
+            );
         }
         unlock = function(){
             suppressWarnings(
                 {RSQLite::dbGetQuery(con, "COMMIT TRANSACTION");}
-            )
+            );
         }
         lockedrun = function(expr){
-            on.exit(unlock())
+            on.exit(unlock());
             lock();
             return(expr);
         }
@@ -831,7 +831,7 @@ fm.create.from.text.file = function(
     
     # clean object if file is open
 
-    fm = fm.create(filenamebase, nrow = 9, ncol = 9, type = type, size = size);
+    fm = fm.create(filenamebase, nrow = 0, ncol = 0, type = type, size = size);
     
     lines = readLines(con = fid, n = max(skipRows,1L), ok = TRUE, warn = TRUE)
     line1 = tail(lines,1L);
@@ -870,7 +870,7 @@ fm.create.from.text.file = function(
                 temp = "";
             }
 
-            rowtag[i] = temp[rowNamesColumn];#paste(temp,collapse=" ");
+            rowtag[i] = temp[rowNamesColumn]; # paste(temp, collapse=" ");
             rowvals[[i]] = scan(
                         file = fid,
                         what = double(),
@@ -902,7 +902,7 @@ fm.create.from.text.file = function(
         if( length(rowtag) < sliceSize ){
             break;
         }
-        message( "Rows read: ", s(ncol(fm)));
+        message("Rows read: ", s(ncol(fm)));
         flush.console()
     }
     close(fid);
