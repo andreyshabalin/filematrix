@@ -8,7 +8,7 @@ Access to parts of the matrix is done by indexing,
 exactly as with usual R matrices.
 Supports very large matrices.
 Tested on multi-terabyte matrices.
-Allows for more than 2^32^ rows or columns.
+Allows for more than 2^32 rows or columns.
 Allows for quick addition of extra columns to a filematrix.
 Cross-platform as the package has R code only.
 
