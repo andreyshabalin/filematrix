@@ -24,11 +24,11 @@
 ### the same hard drive.
 
 file.lock = function(fname = NULL, timeout = 3600000){
-    if (!requireNamespace("RSQLite")){
-        message("RSQLite needed for file lock to work.");
-        fname = NULL;
-    }
     if(is.character(fname)){
+        if (!requireNamespace("RSQLite")){
+            message("RSQLite needed for file lock to work.");
+            fname = NULL;
+        }
         # library(RSQLite)
         con = RSQLite::dbConnect(RSQLite::SQLite(), dbname = fname);
         RSQLite::dbGetQuery(con, paste0("PRAGMA busy_timeout = ", timeout));
