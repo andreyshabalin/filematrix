@@ -29,11 +29,7 @@ install.packages("filematrix")
 To install `filematrix` directly from GitHub, run
 
 ```
+if(!requireNamespace("devtools", quietly = TRUE))
+    install.packages("devtools")
 devtools::install_github("andreyshabalin/filematrix")
-```
-
-If `devtools` package is missing, it can be installed with
-
-```
-install.packages("devtools")
 ```
